@@ -30,12 +30,19 @@ mydata <- na.omit(mydata)
 Is attitude toward capitol punishment (cappun) independent of race (race)?
 If not, then whose view differs from whom??
 
+$H_0$ There are no significant differences in the data.  
+
+$H_A$ There are differences in the data.
+
 # Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
-Data analysis on the opinion of towards capikol punishment with respect ot the race of the opinion holder will be done by a two way variable analysis of whether or not they favor or oppose capitol punishment versus their race. The two categorical data types will be analyzed using code blocks from the cat_cat helper file modifiled through the assistance of share?
-A modified fisher test will be done for the inferential results using the fishery -function provided since there are more than two categories in race which makes a normal 2x2 comparison unuseful.
+We are going to use the CandP helper files to compare two categorical data types cappun and race. Because this is a cat-cat problem we will first create a bar chart, then we will run fav states to show graphical and numerical results.
+
+$\Huge\chi^2=\sum\frac{(0-E)^2}{0}$
+
+For inferential results we are going to run a Chi-Squared test which will tell us if there is a difference in the data but not where. Normally we will use a fisher test to do this but in this case we have more than two facotrs in "race" so will will use the fisherXY function to run fisher tests for all combinations.
 
 # Results
 

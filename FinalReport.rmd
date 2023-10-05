@@ -34,6 +34,8 @@ If not, then whose view differs from whom??
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
+Data analysis on the opinion of towards capikol punishment with respect ot the race of the opinion holder will be done by a two way variable analysis of whether or not they favor or oppose capitol punishment versus their race. The two categorical data types will be analyzed using code blocks from the cat_cat helper file modifiled through the assistance of share?A modified fisher test will be done for the inferential results using the fishery -function provided since there are more than two categories in race which makes a normal 2x2 comparison unuseful.
+
 # Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->

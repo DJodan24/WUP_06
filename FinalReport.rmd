@@ -19,7 +19,7 @@ require(knitr)
 require(foreign)
 GSS <-read.dta(file="GSS2016.dta")
 GSS <- droplevels(GSS)
-mydata <- select(GSS,race,cappun)
+mydata <- select(GSS,sex,race,cappun,degree,relig,gunlaw,tvhours,owngun,age,wordsum)
 mydata <- na.omit(mydata)
 ```
 
@@ -30,15 +30,14 @@ mydata <- na.omit(mydata)
 Is attitude toward capitol punishment (cappun) independent of race (race)?
 If not, then whose view differs from whom??
 
-$H_0$ There are no significant differences in the data.  
-
-$H_A$ There are differences in the data.
-
 # Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method. Discuss what data manipulations may be needed for example subsetting or other binning procedures and what sort of graphical displays and inferential tools will be used!-->
 
-Data analysis on the opinion of towards capitol punishment with respect ot the race of the opinion holder will be done by a two way variable analysis of whether or not they favor or oppose capitol punishment versus their race. The two categorical data types will be analyzed using code blocks from the cat_cat helper file modifiled through the assistance of share?A modified fisher test will be done for the inferential results using the fishery -function provided since there are more than two categories in race which makes a normal 2x2 comparison unuseful.
+```{r eval=FALSE}
+mydata <- mydata %>%
+mutate(across(where(is.character), as.factor))
+``` 
 
 # Results
 
@@ -56,6 +55,7 @@ barchartGC(~race + cappun,data=mydata, type="percent")
 
 ```
 
+  
 For the data shown above, the population that favors capitol punishment the most is the whites, then the "other" and then the black. The data here is similar to the data from the master branch where the percentages of those in favor and opposing are highly similar. 
 
 ## Now with The Most data (fewer variables gives more data points)
@@ -69,10 +69,11 @@ For the data shown above, the population that favors capitol punishment the most
 ```{r}
 table1 <- xtabs(~race + cappun, data=mydata)
 rowPerc(table1)
+print("----------")
 colPerc(table1)
-```
-
-The table above shows that there is 68% of the white population in favor of capitol punishment while 32% is opposed. Other population has 61% in favor and 39% opposed. The black population has 47% in favor with 53% opposed. The percentages here differ from those in the master branch, but are still very similar with each other. 
+``` 
+  
+The table above shows that there is 68% of the white population in favor of capitol punishment while 32% is opposed. Other population has 61% in favor and 39% opposed. The black population has 47% in favor with 53% opposed. The percentages here differ from those in the master branch, but are still very similar with each other.  
 
 ## Now with More data
 
@@ -82,11 +83,19 @@ The table above shows that there is 68% of the white population in favor of capi
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+`
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+
 ```{r}
 fisherXY (mydata$race,mydata$cappun, printAll=TRUE)
 ```
-
-The fisher XY test tells us that white and black are different with a p-value of 0.00001.741. There is no difference between black and other since the p-value is 0.06 and with white and other the p-value is 0.25.
+  
+The fisher XY test tells us that white and black are different with a p-value of 0.00001741. There is no difference between black and other since the p-value is 0.06299 and with white and other the p-value is 0.2565. 
 
 ## More data version
 
@@ -95,4 +104,5 @@ The fisher XY test tells us that white and black are different with a p-value of
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
 
-The data above shows that the population of whites had the most in favor for capitol punishment. The second highest was the population of other and the lowest was the population of blacks. This is similar to the values from the master branch, but the percentages in this branch were higher than in the master branch since we were given a smaller sample size. 
+The data above shows that the population of whites had the most in favor for capitol punishment. The second highest was the population of other and the lowest was the population of blacks. This is similar to the values from the master branch, but the percentages in this branch were higher than in the master branch since we were given a smaller sample size.  
+
